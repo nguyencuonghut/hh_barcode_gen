@@ -69,13 +69,7 @@ class BarcodeController extends Controller
      */
     public function show($id)
     {
-        $barcode_info = Barcode::find($id);
-        $info = $barcode_info->client_name .
-            '|' . $barcode_info->region .
-            '|' . $barcode_info->product_name .
-            '|' . $barcode_info->product_date .
-            '|' . $barcode_info->expired_date .
-            '|' . $barcode_info->selling_date;
+        $info = Barcode::find($id);
         return view('barcode.show')
             ->withInfo($info)
             ->withId($id);

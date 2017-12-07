@@ -97,15 +97,6 @@
                     </div>
                     {!! Form::close() !!}
                 </div>
-            <br/>
-            <hr>
-
-
-            <h3>In mã vạch</h3>
-            <div style="border: 4px solid #a1a1a1;margin-top: 15px;padding: 20px;">
-                <a href="#"><button class="btn btn-success btn-lg">In</button></a>
-            </div>
-
         </div>
     </div>
 </div>
@@ -113,4 +104,6 @@
 
 </body>
 
+
+<p class="text-center">Copyright Nguyen Van Cuong - All Rights Reserved</p>
 </html>
