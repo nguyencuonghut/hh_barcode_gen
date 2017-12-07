@@ -57,7 +57,6 @@ class BarcodeController extends Controller
         $barcode_info->selling_date = $request->selling_date;
         $barcode_info->save();
 
-        //Generate barcode and store to public folder
 
         return redirect()->route('barcode.show', $barcode_info->id);
     }
@@ -77,7 +76,9 @@ class BarcodeController extends Controller
             '|' . $barcode_info->product_date .
             '|' . $barcode_info->expired_date .
             '|' . $barcode_info->selling_date;
-        return view('barcode.show')->withInfo($info);
+        return view('barcode.show')
+            ->withInfo($info)
+            ->withId($id);
     }
 
     /**
@@ -112,5 +113,26 @@ class BarcodeController extends Controller
     public function destroy($id)
     {
         //
+    }
+    /**
+     * Print the barcode image.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function barcodePrint($id)
+    {
+        // Create barcode image (.png)
+        $barcode_info = Barcode::find($id);
+        $info = $barcode_info->client_name .
+            '|' . $barcode_info->region .
+            '|' . $barcode_info->product_name .
+            '|' . $barcode_info->product_date .
+            '|' . $barcode_info->expired_date .
+            '|' . $barcode_info->selling_date;
+        $barcode_file_name =  DNS2D::getBarcodePNGPath($info, "QRCODE");
+
+        return response(file_get_contents(public_path() . "/" . $barcode_file_name,200))
+            ->header('Content-type', 'image/png');
     }
 }

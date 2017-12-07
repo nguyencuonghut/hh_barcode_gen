@@ -92,7 +92,7 @@
                     <br>
                     <br>
                     <div class="form-group">
-                        {!! Form::submit('Lưu thông tin',
+                        {!! Form::submit('Tạo mã vạch',
                           array('class'=>'btn btn-primary')) !!}
                     </div>
                     {!! Form::close() !!}

@@ -12,6 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('barcode.create');
 });
 Route::resource('/barcode', 'BarcodeController');
+Route::get('/barcode/print/{id}', ['uses' => 'BarcodeController@barcodePrint', 'as' => 'barcode.print']);

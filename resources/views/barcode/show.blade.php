@@ -64,7 +64,7 @@
                             {!! Form::label('product_date', 'Ngày sản xuất:', ['class' => 'control-label']) !!}
                             {!!
                                 Form::date('product_date',
-                                \Carbon\Carbon::now()->addDays(7),
+                                \Carbon\Carbon::now(),
                                 ['class' => 'form-control'])
                             !!}
                         </div>
@@ -73,7 +73,7 @@
                             {!! Form::label('expired_date', 'Ngày hết hạn:', ['class' => 'control-label']) !!}
                             {!!
                                 Form::date('expired_date',
-                                \Carbon\Carbon::now()->addDays(7),
+                                \Carbon\Carbon::now(),
                                 ['class' => 'form-control'])
                             !!}
                         </div>
@@ -82,7 +82,7 @@
                             {!! Form::label('selling_date', 'Ngày bán hàng:', ['class' => 'control-label']) !!}
                             {!!
                                 Form::date('selling_date',
-                                \Carbon\Carbon::now()->addDays(7),
+                                \Carbon\Carbon::now(),
                                 ['class' => 'form-control'])
                             !!}
                         </div>
@@ -92,7 +92,7 @@
                     <br>
                     <br>
                     <div class="form-group">
-                        {!! Form::submit('Lưu thông tin',
+                        {!! Form::submit('Tạo mã vạch',
                           array('class'=>'btn btn-primary')) !!}
                     </div>
                     {!! Form::close() !!}
@@ -100,14 +100,13 @@
             <br/>
             <div class="container text-center" style="border: 1px solid #a1a1a1;padding: 15px;width: 70%;">
                 <img src="data:image/png;base64,{{DNS2D::getBarcodePNG($info, 'QRCODE', 5, 5)}}" alt="barcode" />
-                <p>{{DNS2D::getBarcodePNGPath($info, "QRCODE")}}</p>
             </div>
             <hr>
 
 
             <h3>In mã vạch</h3>
             <div style="border: 4px solid #a1a1a1;margin-top: 15px;padding: 20px;">
-                <a href="#"><button class="btn btn-success btn-lg">In</button></a>
+                <a href="{{route('barcode.print', $id)}}"><button class="btn btn-success btn-lg">In</button></a>
             </div>
 
         </div>
