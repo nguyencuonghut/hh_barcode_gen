@@ -76,11 +76,11 @@
                     <div class="container text-center" style="border: 1px solid #a1a1a1;padding: 15px;width: 70%;">
                         <?php
                         $barcode_info = $info->client_name .
-                            '|' . $info->region .
-                            '|' . $info->product_name .
-                            '|' . $info->product_date .
-                            '|' . $info->expired_date .
-                            '|' . $info->selling_date;
+                            '_' . $info->region .
+                            '_' . $info->product_name .
+                            '_' . $info->product_date .
+                            '_' . $info->expired_date .
+                            '_' . $info->selling_date;
                         ?>
                         <img src="data:image/png;base64,{{DNS2D::getBarcodePNG($barcode_info, 'QRCODE', 5, 5)}}" alt="barcode" />
                     </div>

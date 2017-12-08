@@ -119,11 +119,11 @@ class BarcodeController extends Controller
         // Create barcode image (.png)
         $barcode_info = Barcode::find($id);
         $info = $barcode_info->client_name .
-            '|' . $barcode_info->region .
-            '|' . $barcode_info->product_name .
-            '|' . $barcode_info->product_date .
-            '|' . $barcode_info->expired_date .
-            '|' . $barcode_info->selling_date;
+            '_' . $barcode_info->region .
+            '_' . $barcode_info->product_name .
+            '_' . $barcode_info->product_date .
+            '_' . $barcode_info->expired_date .
+            '_' . $barcode_info->selling_date;
         $barcode_file_name =  DNS2D::getBarcodePNGPath($info, "QRCODE");
 
         return response(file_get_contents(public_path() . "/" . $barcode_file_name,200))
