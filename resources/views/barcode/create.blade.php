@@ -29,6 +29,26 @@
                 <div style="border: 4px solid #a1a1a1;margin-top: 15px;margin-bottom: 15px;padding: 20px;">
                     {!! Form::open(array('route' => 'barcode.store', 'class' => 'form')) !!}
                     <div class="form-inline">
+                        <div class="form-group col-sm-6 removeleft">
+                            {!! Form::label('client_name', 'Số thứ tự khách hàng:', ['class' => 'control-label']) !!}
+                            {!!
+                                Form::text('client_name',
+                                null,
+                                ['class' => 'form-control'])
+                            !!}
+                        </div>
+
+                        <div class="form-group col-sm-6 removeleft">
+                            {!! Form::label('selling_date', 'Ngày xuất hàng:', ['class' => 'control-label']) !!}
+                            {!!
+                                Form::date('selling_date',
+                                \Carbon\Carbon::now()->addDays(7),
+                                ['class' => 'form-control'])
+                            !!}
+                        </div>
+                    </div>
+                    <!--
+                    <div class="form-inline">
                         <div class="form-group col-sm-3 removeleft">
                             {!! Form::label('client_name', 'Tên khách hàng:', ['class' => 'control-label']) !!}
                             {!!
@@ -87,6 +107,7 @@
                             !!}
                         </div>
                     </div>
+                    -->
                     <br>
                     <br>
                     <br>

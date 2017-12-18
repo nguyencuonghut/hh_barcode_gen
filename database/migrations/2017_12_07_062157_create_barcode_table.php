@@ -16,10 +16,10 @@ class CreateBarcodeTable extends Migration
         Schema::create('barcode', function (Blueprint $table) {
             $table->increments('id');
             $table->string('client_name');
-            $table->string('region');
-            $table->string('product_name');
-            $table->date('product_date');
-            $table->date('expired_date');
+            $table->string('region')->nullable();
+            $table->string('product_name')->nullable();
+            $table->date('product_date')->nullable();
+            $table->date('expired_date')->nullable();
             $table->date('selling_date');
             $table->timestamps();
         });

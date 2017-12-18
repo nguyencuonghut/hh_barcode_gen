@@ -32,6 +32,26 @@
                 </h3>
                 <div style="border: 4px solid #a1a1a1;margin-top: 15px;margin-bottom: 15px;padding: 10px;">
                     <div class="form-inline">
+                        <div class="form-group col-sm-6 removeleft">
+                            {!! Form::label('client_name', 'Số thứ tự khách hàng:', ['class' => 'control-label']) !!}
+                            {!!
+                                Form::text('client_name',
+                                null,
+                                ['class' => 'form-control'])
+                            !!}
+                        </div>
+
+                        <div class="form-group col-sm-6 removeleft">
+                            {!! Form::label('selling_date', 'Ngày xuất hàng:', ['class' => 'control-label']) !!}
+                            {!!
+                                Form::date('selling_date',
+                                \Carbon\Carbon::now()->addDays(7),
+                                ['class' => 'form-control'])
+                            !!}
+                        </div>
+                    </div>
+                    <!--
+                    <div class="form-inline">
                         <div class="form-group col-sm-3 removeleft">
                             {!! Form::label('client_name', 'Tên khách hàng:', ['class' => 'control-label']) !!}
                             <p>{{$info->client_name}}</p>
@@ -66,6 +86,7 @@
                             <p>{{$info->selling_date}}</p>
                         </div>
                     </div>
+                    -->
                     <br>
                     <br>
                     <br>
@@ -75,14 +96,9 @@
 
                     <div class="container text-center" style="border: 1px solid #a1a1a1;padding: 15px;width: 70%;">
                         <?php
-                        $barcode_info = $info->client_name .
-                            '_' . $info->region .
-                            '_' . $info->product_name .
-                            '_' . $info->product_date .
-                            '_' . $info->expired_date .
-                            '_' . $info->selling_date;
+                        $barcode_info = $info->client_name . date('dmY', strtotime($info->selling_date));
                         ?>
-                        <img src="data:image/png;base64,{{DNS2D::getBarcodePNG($barcode_info, 'QRCODE', 5, 5)}}" alt="barcode" />
+                        <img src="data:image/png;base64,{{DNS1D::getBarcodePNG($barcode_info, 'C128C')}}" alt="barcode" />
                     </div>
                 </div>
             <br/>

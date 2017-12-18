@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Barcode;
-use Milon\Barcode\DNS2D;
-use Image;
+use Milon\Barcode\DNS1D;
 
 class BarcodeController extends Controller
 {
@@ -38,6 +37,7 @@ class BarcodeController extends Controller
     public function store(Request $request)
     {
         // Validate input data
+        /*
         $this->validate($request, array(
             'client_name'   => 'required',
             'region'        => 'required',
@@ -46,6 +46,7 @@ class BarcodeController extends Controller
             'expired_date'  => 'required',
             'selling_date'  => 'required'
         ));
+        */
 
         // Store information to database
         $barcode_info = new Barcode;
@@ -118,13 +119,8 @@ class BarcodeController extends Controller
     {
         // Create barcode image (.png)
         $barcode_info = Barcode::find($id);
-        $info = $barcode_info->client_name .
-            '_' . $barcode_info->region .
-            '_' . $barcode_info->product_name .
-            '_' . $barcode_info->product_date .
-            '_' . $barcode_info->expired_date .
-            '_' . $barcode_info->selling_date;
-        $barcode_file_name =  DNS2D::getBarcodePNGPath($info, "QRCODE");
+        $info = $barcode_info->client_name . date('dmY', strtotime($barcode_info->selling_date));
+        $barcode_file_name =  DNS1D::getBarcodePNGPath($info, "C128C");
 
         return response(file_get_contents(public_path() . "/" . $barcode_file_name,200))
             ->header('Content-type', 'image/png');
