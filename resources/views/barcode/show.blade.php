@@ -45,7 +45,7 @@
                             {!! Form::label('selling_date', 'Ngày xuất hàng:', ['class' => 'control-label']) !!}
                             {!!
                                 Form::date('selling_date',
-                                \Carbon\Carbon::now()->addDays(7),
+                                \Carbon\Carbon::now(),
                                 ['class' => 'form-control'])
                             !!}
                         </div>
