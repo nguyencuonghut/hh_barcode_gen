@@ -34,20 +34,12 @@
                     <div class="form-inline">
                         <div class="form-group col-sm-6 removeleft">
                             {!! Form::label('client_name', 'Số thứ tự khách hàng:', ['class' => 'control-label']) !!}
-                            {!!
-                                Form::text('client_name',
-                                null,
-                                ['class' => 'form-control'])
-                            !!}
+                            {{$info->client_name}}
                         </div>
 
                         <div class="form-group col-sm-6 removeleft">
                             {!! Form::label('selling_date', 'Ngày xuất hàng:', ['class' => 'control-label']) !!}
-                            {!!
-                                Form::date('selling_date',
-                                \Carbon\Carbon::now(),
-                                ['class' => 'form-control'])
-                            !!}
+                            {{$info->selling_date}}
                         </div>
                     </div>
                     <!--
