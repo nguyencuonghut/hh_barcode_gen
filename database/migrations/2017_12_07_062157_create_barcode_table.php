@@ -20,7 +20,7 @@ class CreateBarcodeTable extends Migration
             $table->string('product_name')->nullable();
             $table->date('product_date')->nullable();
             $table->date('expired_date')->nullable();
-            $table->date('selling_date');
+            $table->integer('selling_month');
             $table->timestamps();
         });
     }

@@ -38,8 +38,8 @@
                         </div>
 
                         <div class="form-group col-sm-6 removeleft">
-                            {!! Form::label('selling_date', 'Ngày xuất hàng:', ['class' => 'control-label']) !!}
-                            {{$info->selling_date}}
+                            {!! Form::label('selling_month', 'Tháng xuất hàng:', ['class' => 'control-label']) !!}
+                            {{date("M", mktime(0, 0, 0, $info->selling_month, 10))}}
                         </div>
                     </div>
                     <!--
@@ -74,8 +74,8 @@
                         </div>
 
                         <div class="form-group col-sm-3  col-sm-offset-1 removeleft removeright">
-                            {!! Form::label('selling_date', 'Ngày bán:', ['class' => 'control-label']) !!}
-                            <p>{{$info->selling_date}}</p>
+                            {!! Form::label('selling_month', 'Tháng bán:', ['class' => 'control-label']) !!}
+                            <p>{{$info->selling_month}}</p>
                         </div>
                     </div>
                     -->
@@ -88,9 +88,9 @@
 
                     <div class="container text-center" style="border: 1px solid #a1a1a1;padding: 15px;width: 70%;">
                         <?php
-                        $barcode_info = $info->client_name . date('dmY', strtotime($info->selling_date));
+                        $barcode_info = $info->client_name . date("M", mktime(0, 0, 0, $info->selling_month, 10));
                         ?>
-                        <img src="data:image/png;base64,{{DNS1D::getBarcodePNG($barcode_info, 'C128C')}}" alt="barcode" />
+                        <img src="data:image/png;base64,{{DNS1D::getBarcodePNG($barcode_info, 'C128')}}" alt="barcode" />
                     </div>
                 </div>
             <br/>

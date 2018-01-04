@@ -39,12 +39,8 @@
                         </div>
 
                         <div class="form-group col-sm-6 removeleft">
-                            {!! Form::label('selling_date', 'Ngày xuất hàng:', ['class' => 'control-label']) !!}
-                            {!!
-                                Form::date('selling_date',
-                                \Carbon\Carbon::now(),
-                                ['class' => 'form-control'])
-                            !!}
+                            {!! Form::label('selling_month', 'Tháng xuất hàng:', ['class' => 'control-label']) !!}
+                            {!! Form::selectMonth('selling_month', date('m', strtotime('this month')), ['class' => 'field form-control'], '%m') !!}
                         </div>
                     </div>
                     <!--
@@ -99,9 +95,9 @@
                         </div>
 
                         <div class="form-group col-sm-3  col-sm-offset-1 removeleft removeright">
-                            {!! Form::label('selling_date', 'Ngày bán:', ['class' => 'control-label']) !!}
+                            {!! Form::label('selling_month', 'Ngày bán:', ['class' => 'control-label']) !!}
                             {!!
-                                Form::date('selling_date',
+                                Form::date('selling_month',
                                 \Carbon\Carbon::now()->addDays(7),
                                 ['class' => 'form-control'])
                             !!}

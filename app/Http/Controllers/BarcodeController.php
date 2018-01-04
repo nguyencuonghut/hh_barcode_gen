@@ -44,18 +44,20 @@ class BarcodeController extends Controller
             'product_name'  => 'required',
             'product_date'  => 'required',
             'expired_date'  => 'required',
-            'selling_date'  => 'required'
+            'selling_month' => 'required'
         ));
         */
 
         // Store information to database
         $barcode_info = new Barcode;
         $barcode_info->client_name = $request->client_name;
+        /*
         $barcode_info->region = $request->region;
         $barcode_info->product_name = $request->product_name;
         $barcode_info->product_date = $request->product_date;
         $barcode_info->expired_date = $request->expired_date;
-        $barcode_info->selling_date = $request->selling_date;
+        */
+        $barcode_info->selling_month = $request->selling_month;
         $barcode_info->save();
 
 
@@ -119,8 +121,8 @@ class BarcodeController extends Controller
     {
         // Create barcode image (.png)
         $barcode_info = Barcode::find($id);
-        $info = $barcode_info->client_name . date('dmY', strtotime($barcode_info->selling_date));
-        $barcode_file_name =  DNS1D::getBarcodePNGPath($info, "C128C");
+        $info = $barcode_info->client_name . date("M", mktime(0, 0, 0, $barcode_info->selling_month, 10));;
+        $barcode_file_name =  DNS1D::getBarcodePNGPath($info, "C128");
 
         return response(file_get_contents(public_path() . "/" . $barcode_file_name,200))
             ->header('Content-type', 'image/png');

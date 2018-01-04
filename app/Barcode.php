@@ -14,6 +14,6 @@ class Barcode extends Model
      * @var array
      */
     protected $fillable = [
-        'client_name', 'region', 'product_name', 'product_date', 'expired_date', 'selling_date',
+        'client_name', 'region', 'product_name', 'product_date', 'expired_date', 'selling_month',
     ];
 }
