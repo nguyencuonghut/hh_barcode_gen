@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Barcode;
 use Milon\Barcode\DNS1D;
+use Excel;
+use PHPExcel_Worksheet_Drawing;
 
 class BarcodeController extends Controller
 {
@@ -126,5 +128,38 @@ class BarcodeController extends Controller
 
         return response(file_get_contents(public_path() . "/" . $barcode_file_name,200))
             ->header('Content-type', 'image/png');
+    }
+
+    /**
+     * Export the barcode image to excel file.
+     *
+     * @param  int  $type
+     * @return \Illuminate\Http\Response
+     */
+    public function export($id)
+    {
+        $type = 'xlsx';
+
+        // Create the excel file
+        return Excel::create('BarcodeForm', function ($excel) use ($id) {
+
+            $excel->sheet('mysheet', function($sheet) use ($id){
+                // Create barcode image (.png)
+                $barcode_info = Barcode::find($id);
+                $info = $barcode_info->client_name . date("M", mktime(0, 0, 0, $barcode_info->selling_month, 10));;
+                $barcode_file_name =  DNS1D::getBarcodePNGPath($info, "C128");
+
+                //Import image to A1 and C1
+                $objDrawing = new PHPExcel_Worksheet_Drawing;
+                $objDrawing->setPath(public_path($barcode_file_name)); //your image path
+                $objDrawing->setCoordinates('A1');
+                $objDrawing->setWorksheet($sheet);
+
+                $objDrawing = new PHPExcel_Worksheet_Drawing;
+                $objDrawing->setPath(public_path($barcode_file_name)); //your image path
+                $objDrawing->setCoordinates('D1');
+                $objDrawing->setWorksheet($sheet);
+            });
+        })->download($type);
     }
 }

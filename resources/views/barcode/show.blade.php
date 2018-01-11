@@ -95,10 +95,15 @@
                 </div>
             <br/>
 
-
+            <!--
             <h3>In mã vạch</h3>
             <div style="border: 4px solid #a1a1a1;margin-top: 15px;padding: 20px;">
                 <a target="_blank" href="{{route('barcode.print', $id)}}"><button class="btn btn-success btn-lg">In</button></a>
+            </div>
+            -->
+            <h3>Tải file mẫu in mã vạch:</h3>
+            <div style="border: 4px solid #a1a1a1;margin-top: 15px;padding: 20px;">
+                <a href="{{ url('barcode/export', $id) }}"><button class="btn btn-success btn-lg">Tải file</button></a>
             </div>
 
         </div>
