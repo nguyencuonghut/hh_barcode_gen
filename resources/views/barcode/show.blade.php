@@ -33,8 +33,8 @@
                 <div style="border: 4px solid #a1a1a1;margin-top: 15px;margin-bottom: 15px;padding: 10px;">
                     <div class="form-inline">
                         <div class="form-group col-sm-6 removeleft">
-                            {!! Form::label('client_name', 'Số thứ tự khách hàng:', ['class' => 'control-label']) !!}
-                            {{$info->client_name}}
+                            {!! Form::label('client_name', 'Khách hàng:', ['class' => 'control-label']) !!}
+                            {{$client->code}} - {{$client->name}}
                         </div>
 
                         <div class="form-group col-sm-6 removeleft">
@@ -42,43 +42,6 @@
                             {{date("M", mktime(0, 0, 0, $info->selling_month, 10))}}
                         </div>
                     </div>
-                    <!--
-                    <div class="form-inline">
-                        <div class="form-group col-sm-3 removeleft">
-                            {!! Form::label('client_name', 'Tên khách hàng:', ['class' => 'control-label']) !!}
-                            <p>{{$info->client_name}}</p>
-                        </div>
-
-                        <div class="form-group col-sm-3 col-sm-offset-1 removeleft removeright">
-                            {!! Form::label('region', 'Vùng kinh doanh:', ['class' => 'control-label']) !!}
-                            <p>{{$info->region}}</p>
-                        </div>
-                        <div class="form-group col-sm-3  col-sm-offset-1 removeleft">
-                            {!! Form::label('product_name', 'Tên sản phẩm:', ['class' => 'control-label']) !!}
-                            <p>{{$info->product_name}}</p>
-                        </div>
-                    </div>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <div class="form-inline">
-                        <div class="form-group col-sm-3 removeleft">
-                            {!! Form::label('product_date', 'Ngày sản xuất:', ['class' => 'control-label']) !!}
-                            <p>{{$info->product_date}}</p>
-                        </div>
-
-                        <div class="form-group col-sm-3 col-sm-offset-1 removeleft removeright">
-                            {!! Form::label('expired_date', 'Ngày hết hạn:', ['class' => 'control-label']) !!}
-                            <p>{{$info->expired_date}}</p>
-                        </div>
-
-                        <div class="form-group col-sm-3  col-sm-offset-1 removeleft removeright">
-                            {!! Form::label('selling_month', 'Tháng bán:', ['class' => 'control-label']) !!}
-                            <p>{{$info->selling_month}}</p>
-                        </div>
-                    </div>
-                    -->
                     <br>
                     <br>
                     <br>
@@ -88,7 +51,7 @@
 
                     <div class="container text-center" style="border: 1px solid #a1a1a1;padding: 15px;width: 70%;">
                         <?php
-                        $barcode_info = $info->client_name . date("M", mktime(0, 0, 0, $info->selling_month, 10));
+                        $barcode_info = $client->code . ' ' . date("M", mktime(0, 0, 0, $info->selling_month, 10));
                         ?>
                         <img src="data:image/png;base64,{{DNS1D::getBarcodePNG($barcode_info, 'C128')}}" alt="barcode" />
                     </div>

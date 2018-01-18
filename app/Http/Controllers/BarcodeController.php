@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Client;
 use Illuminate\Http\Request;
 use App\Barcode;
 use Milon\Barcode\DNS1D;
@@ -27,7 +28,8 @@ class BarcodeController extends Controller
      */
     public function create()
     {
-        return view('barcode.create');
+        $clients = Client::selectRaw('id, CONCAT(code, " (", name, ")") as codeAndName')->pluck('codeAndName', 'id');
+        return view('barcode.create', compact('clients'));
     }
 
     /**
@@ -38,27 +40,9 @@ class BarcodeController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate input data
-        /*
-        $this->validate($request, array(
-            'client_name'   => 'required',
-            'region'        => 'required',
-            'product_name'  => 'required',
-            'product_date'  => 'required',
-            'expired_date'  => 'required',
-            'selling_month' => 'required'
-        ));
-        */
-
         // Store information to database
         $barcode_info = new Barcode;
         $barcode_info->client_name = $request->client_name;
-        /*
-        $barcode_info->region = $request->region;
-        $barcode_info->product_name = $request->product_name;
-        $barcode_info->product_date = $request->product_date;
-        $barcode_info->expired_date = $request->expired_date;
-        */
         $barcode_info->selling_month = $request->selling_month;
         $barcode_info->save();
 
@@ -75,9 +59,11 @@ class BarcodeController extends Controller
     public function show($id)
     {
         $info = Barcode::find($id);
+        $client = Client::findOrFail($info->client_name);
         return view('barcode.show')
             ->withInfo($info)
-            ->withId($id);
+            ->withId($id)
+            ->withClient($client);
     }
 
     /**
@@ -146,7 +132,8 @@ class BarcodeController extends Controller
             $excel->sheet('mysheet', function($sheet) use ($id){
                 // Create barcode image (.png)
                 $barcode_info = Barcode::find($id);
-                $info = $barcode_info->client_name . date("M", mktime(0, 0, 0, $barcode_info->selling_month, 10));;
+                $client = Client::findOrFail($barcode_info->client_name);
+                $info = $client->code . ' ' . date("M", mktime(0, 0, 0, $barcode_info->selling_month, 10));;
                 $barcode_file_name =  DNS1D::getBarcodePNGPath($info, "C128");
 
                 //Import image to A1 and C1
@@ -157,7 +144,7 @@ class BarcodeController extends Controller
 
                 $objDrawing = new PHPExcel_Worksheet_Drawing;
                 $objDrawing->setPath(public_path($barcode_file_name)); //your image path
-                $objDrawing->setCoordinates('D1');
+                $objDrawing->setCoordinates('E1');
                 $objDrawing->setWorksheet($sheet);
             });
         })->download($type);

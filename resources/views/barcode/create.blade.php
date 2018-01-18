@@ -2,6 +2,7 @@
 <head>
     <title>HH Barcode Generator</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" >
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -29,81 +30,16 @@
                 <div style="border: 4px solid #a1a1a1;margin-top: 15px;margin-bottom: 15px;padding: 20px;">
                     {!! Form::open(array('route' => 'barcode.store', 'class' => 'form')) !!}
                     <div class="form-inline">
-                        <div class="form-group col-sm-6 removeleft">
-                            {!! Form::label('client_name', 'Số thứ tự khách hàng:', ['class' => 'control-label']) !!}
-                            {!!
-                                Form::text('client_name',
-                                null,
-                                ['class' => 'form-control'])
-                            !!}
+                        <div class="form-group col-sm-7 removeleft">
+                            {!! Form::label('client_name', 'Mã KH:', ['class' => 'control-label']) !!}
+                            {!! Form::select('client_name', $clients, null, ['id'=>'client_name', 'name'=>'client_name','class'=>'form-control']) !!}
                         </div>
 
-                        <div class="form-group col-sm-6 removeleft">
+                        <div class="form-group col-sm-4 col-sm-offset-1 removeleft">
                             {!! Form::label('selling_month', 'Tháng xuất hàng:', ['class' => 'control-label']) !!}
                             {!! Form::selectMonth('selling_month', date('m', strtotime('this month')), ['class' => 'field form-control'], '%m') !!}
                         </div>
                     </div>
-                    <!--
-                    <div class="form-inline">
-                        <div class="form-group col-sm-3 removeleft">
-                            {!! Form::label('client_name', 'Tên khách hàng:', ['class' => 'control-label']) !!}
-                            {!!
-                                Form::text('client_name',
-                                null,
-                                ['class' => 'form-control'])
-                            !!}
-                        </div>
-
-                        <div class="form-group col-sm-3 col-sm-offset-1 removeleft removeright">
-                            {!! Form::label('region', 'Vùng kinh doanh:', ['class' => 'control-label']) !!}
-                            {!!
-                                Form::text('region',
-                                null,
-                                ['class' => 'form-control'])
-                            !!}
-                        </div>
-                        <div class="form-group col-sm-3  col-sm-offset-1 removeleft">
-                            {!! Form::label('product_name', 'Tên sản phẩm:', ['class' => 'control-label']) !!}
-                            {!!
-                                Form::text('product_name',
-                                null,
-                                ['class' => 'form-control'])
-                            !!}
-                        </div>
-                    </div>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <div class="form-inline">
-                        <div class="form-group col-sm-3 removeleft">
-                            {!! Form::label('product_date', 'Ngày sản xuất:', ['class' => 'control-label']) !!}
-                            {!!
-                                Form::date('product_date',
-                                \Carbon\Carbon::now()->addDays(7),
-                                ['class' => 'form-control'])
-                            !!}
-                        </div>
-
-                        <div class="form-group col-sm-3 col-sm-offset-1 removeleft removeright">
-                            {!! Form::label('expired_date', 'Ngày hết hạn:', ['class' => 'control-label']) !!}
-                            {!!
-                                Form::date('expired_date',
-                                \Carbon\Carbon::now()->addDays(7),
-                                ['class' => 'form-control'])
-                            !!}
-                        </div>
-
-                        <div class="form-group col-sm-3  col-sm-offset-1 removeleft removeright">
-                            {!! Form::label('selling_month', 'Ngày bán:', ['class' => 'control-label']) !!}
-                            {!!
-                                Form::date('selling_month',
-                                \Carbon\Carbon::now()->addDays(7),
-                                ['class' => 'form-control'])
-                            !!}
-                        </div>
-                    </div>
-                    -->
                     <br>
                     <br>
                     <br>
@@ -114,10 +50,30 @@
                     </div>
                     {!! Form::close() !!}
                 </div>
+                <h3>Import danh sách khách hàng</h3>
+                <form style="border: 4px solid #a1a1a1;margin-top: 15px;padding: 20px;" action="{{ URL::to('client/import') }}" class="form-horizontal" method="post" enctype="multipart/form-data">
+
+                    <input type="file" name="import_file" />
+                    {{ csrf_field() }}
+                    <br/>
+
+                    <button class="btn btn-primary">Import CSV hoặc Excel File</button>
+
+                </form>
         </div>
     </div>
 </div>
 </table>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
+<script type="text/javascript">
+    $("#client_name").select2({
+        placeholder: "Chọn mã đại lý",
+        allowClear: true
+    });
+</script>
 
 </body>
 
