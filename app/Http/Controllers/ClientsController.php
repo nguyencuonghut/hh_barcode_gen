@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Client;
 use Excel;
+use Datatables;
 
 class ClientsController extends Controller
 {
@@ -46,5 +47,23 @@ class ClientsController extends Controller
         }
 
         return back()->with('error','Vui lòng kiểm tra file của bạn. Có lỗi xảy ra.');
+    }
+
+    public function anyData()
+    {
+        $clients = Client::select(['id', 'name', 'code', 'address']);
+        return Datatables::of($clients)
+            ->addColumn('id', function ($clients) {
+                return $clients->id;
+            })
+            ->addColumn('name', function ($clients) {
+                return $clients->name;
+            })
+            ->addColumn('code', function ($clients) {
+                return $clients->code;
+            })
+            ->addColumn('address', function ($clients) {
+                return $clients->address;
+            })->make(true);
     }
 }

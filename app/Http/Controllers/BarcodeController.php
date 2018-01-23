@@ -132,8 +132,8 @@ class BarcodeController extends Controller
             $excel->sheet('mysheet', function($sheet) use ($id){
                 // Create barcode image (.png)
                 $barcode_info = Barcode::find($id);
-                $client = Client::findOrFail($barcode_info->client_name);
-                $info = $client->code . ' ' . date("M", mktime(0, 0, 0, $barcode_info->selling_month, 10));;
+                //$client = Client::findOrFail($barcode_info->client_name);
+                $info = $barcode_info->client_name . ' ' . date("M", mktime(0, 0, 0, $barcode_info->selling_month, 10));;
                 $barcode_file_name =  DNS1D::getBarcodePNGPath($info, "C128");
 
                 //Import image to A1 and C1
@@ -144,7 +144,27 @@ class BarcodeController extends Controller
 
                 $objDrawing = new PHPExcel_Worksheet_Drawing;
                 $objDrawing->setPath(public_path($barcode_file_name)); //your image path
-                $objDrawing->setCoordinates('E1');
+                $objDrawing->setCoordinates('A2');
+                $objDrawing->setWorksheet($sheet);
+
+                $objDrawing = new PHPExcel_Worksheet_Drawing;
+                $objDrawing->setPath(public_path($barcode_file_name)); //your image path
+                $objDrawing->setCoordinates('A3');
+                $objDrawing->setWorksheet($sheet);
+
+                $objDrawing = new PHPExcel_Worksheet_Drawing;
+                $objDrawing->setPath(public_path($barcode_file_name)); //your image path
+                $objDrawing->setCoordinates('A4');
+                $objDrawing->setWorksheet($sheet);
+
+                $objDrawing = new PHPExcel_Worksheet_Drawing;
+                $objDrawing->setPath(public_path($barcode_file_name)); //your image path
+                $objDrawing->setCoordinates('A5');
+                $objDrawing->setWorksheet($sheet);
+
+                $objDrawing = new PHPExcel_Worksheet_Drawing;
+                $objDrawing->setPath(public_path($barcode_file_name)); //your image path
+                $objDrawing->setCoordinates('A6');
                 $objDrawing->setWorksheet($sheet);
             });
         })->download($type);
