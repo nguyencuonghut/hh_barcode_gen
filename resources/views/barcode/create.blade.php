@@ -26,18 +26,22 @@
                     {{ Session::get('error') }}
                 </div>
             @endif
-            <h3>Tạo mã vạch</h3>
+            <h3 class="moveup">Tạo mã vạch
+                <span class="pull-right">
+                    <a href="{{route('client.search')}}"><button type="button" class="btn btn-success">Tra cứu mã KH</button></a>
+                </span>
+            </h3>
                 <div style="border: 4px solid #a1a1a1;margin-top: 15px;margin-bottom: 15px;padding: 20px;">
                     {!! Form::open(array('route' => 'barcode.store', 'class' => 'form')) !!}
                     <div class="form-inline">
                         <div class="form-group col-sm-7 removeleft">
                             {!! Form::label('client_name', 'Mã KH:', ['class' => 'control-label']) !!}
-                            {!! Form::select('client_name', $clients, null, ['id'=>'client_name', 'name'=>'client_name','class'=>'form-control']) !!}
+                            {!! Form::select('client_name', $clients, null, ['placeholder' => 'Chọn mã đại lý', 'id'=>'client_name', 'name'=>'client_name','class'=>'form-control']) !!}
                         </div>
 
                         <div class="form-group col-sm-4 col-sm-offset-1 removeleft">
                             {!! Form::label('selling_month', 'Tháng xuất hàng:', ['class' => 'control-label']) !!}
-                            {!! Form::selectMonth('selling_month', date('m', strtotime('this month')), ['class' => 'field form-control'], '%m') !!}
+                            {!! Form::selectMonth('selling_month', date('m', strtotime('this month')), ['id'=>'selling_month', 'name'=>'selling_month', 'class' => 'field form-control'], '%m') !!}
                         </div>
                     </div>
                     <br>

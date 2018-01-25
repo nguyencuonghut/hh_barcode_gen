@@ -33,12 +33,12 @@
                 </h3>
                 <div style="border: 4px solid #a1a1a1;margin-top: 15px;margin-bottom: 15px;padding: 10px;">
                     <div class="form-inline">
-                        <div class="form-group col-sm-6 removeleft">
+                        <div class="form-group col-sm-8 removeleft">
                             {!! Form::label('client_name', 'Khách hàng:', ['class' => 'control-label']) !!}
                             {{$client->code}} - {{$client->name}}
                         </div>
 
-                        <div class="form-group col-sm-6 removeleft">
+                        <div class="form-group col-sm-4 removeleft">
                             {!! Form::label('selling_month', 'Tháng xuất hàng:', ['class' => 'control-label']) !!}
                             {{date("M", mktime(0, 0, 0, $info->selling_month, 10))}}
                         </div>
@@ -68,19 +68,6 @@
             <h3>Tải file mẫu in mã vạch:</h3>
             <div style="border: 4px solid #a1a1a1;margin-top: 15px;padding: 20px;">
                 <a href="{{ url('barcode/export', $id) }}"><button class="btn btn-success btn-lg">Tải file</button></a>
-            </div>
-            <h3>Tra cứu mã vạch:</h3>
-            <div style="border: 4px solid #a1a1a1;margin-top: 15px;padding: 20px;">
-                <table class="table table-hover" id="clients-table">
-                    <thead>
-                    <tr>
-                        <th>{{ __('Số TT') }}</th>
-                        <th>{{ __('Mã KH') }}</th>
-                        <th>{{ __('Tên') }}</th>
-                        <th>{{ __('Địa chỉ') }}</th>
-                    </tr>
-                    </thead>
-                </table>
             </div>
 
         </div>

@@ -139,19 +139,20 @@ class BarcodeController extends Controller
                 //Import image to A1 and C1
                 $objDrawing = new PHPExcel_Worksheet_Drawing;
                 $objDrawing->setPath(public_path($barcode_file_name)); //your image path
-                $objDrawing->setCoordinates('A1');
-                $objDrawing->setWorksheet($sheet);
-
-                $objDrawing = new PHPExcel_Worksheet_Drawing;
-                $objDrawing->setPath(public_path($barcode_file_name)); //your image path
                 $objDrawing->setCoordinates('A2');
                 $objDrawing->setWorksheet($sheet);
 
                 $objDrawing = new PHPExcel_Worksheet_Drawing;
                 $objDrawing->setPath(public_path($barcode_file_name)); //your image path
-                $objDrawing->setCoordinates('A3');
+                $objDrawing->setCoordinates('A4');
                 $objDrawing->setWorksheet($sheet);
 
+                $objDrawing = new PHPExcel_Worksheet_Drawing;
+                $objDrawing->setPath(public_path($barcode_file_name)); //your image path
+                $objDrawing->setCoordinates('A6');
+                $objDrawing->setWorksheet($sheet);
+
+                /*
                 $objDrawing = new PHPExcel_Worksheet_Drawing;
                 $objDrawing->setPath(public_path($barcode_file_name)); //your image path
                 $objDrawing->setCoordinates('A4');
@@ -166,6 +167,7 @@ class BarcodeController extends Controller
                 $objDrawing->setPath(public_path($barcode_file_name)); //your image path
                 $objDrawing->setCoordinates('A6');
                 $objDrawing->setWorksheet($sheet);
+                */
             });
         })->download($type);
     }

@@ -19,3 +19,5 @@ Route::get('/barcode/print/{id}', ['uses' => 'BarcodeController@barcodePrint', '
 Route::get('/barcode/export/{id}', ['uses' => 'BarcodeController@export', 'as' => 'barcode.export'] );
 Route::post('/client/import', ['uses' => 'ClientsController@import', 'as' => 'client.import'] );
 Route::get('/client/data', ['uses' => 'ClientsController@anyData', 'as' => 'client.data'] );
+Route::get('/client/search', ['uses' => 'ClientsController@search', 'as' => 'client.search'] );
+Route::get('/client/back', ['uses' => 'ClientsController@back', 'as' => 'client.back'] );

@@ -66,4 +66,14 @@ class ClientsController extends Controller
                 return $clients->address;
             })->make(true);
     }
+
+    public function search()
+    {
+        return view('barcode.search');
+    }
+
+    public function back()
+    {
+        return redirect()->route('barcode.create');
+    }
 }
