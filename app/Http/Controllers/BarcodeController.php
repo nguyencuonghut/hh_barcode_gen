@@ -152,22 +152,20 @@ class BarcodeController extends Controller
                 $objDrawing->setCoordinates('A6');
                 $objDrawing->setWorksheet($sheet);
 
-                /*
                 $objDrawing = new PHPExcel_Worksheet_Drawing;
                 $objDrawing->setPath(public_path($barcode_file_name)); //your image path
-                $objDrawing->setCoordinates('A4');
+                $objDrawing->setCoordinates('A8');
                 $objDrawing->setWorksheet($sheet);
 
                 $objDrawing = new PHPExcel_Worksheet_Drawing;
                 $objDrawing->setPath(public_path($barcode_file_name)); //your image path
-                $objDrawing->setCoordinates('A5');
+                $objDrawing->setCoordinates('A10');
                 $objDrawing->setWorksheet($sheet);
 
                 $objDrawing = new PHPExcel_Worksheet_Drawing;
                 $objDrawing->setPath(public_path($barcode_file_name)); //your image path
-                $objDrawing->setCoordinates('A6');
+                $objDrawing->setCoordinates('A12');
                 $objDrawing->setWorksheet($sheet);
-                */
             });
         })->download($type);
     }
