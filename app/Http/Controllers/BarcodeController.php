@@ -139,7 +139,7 @@ class BarcodeController extends Controller
 
                 //Add text to barcode
                 $img = Image::make(public_path('barcodes/blank_2.jpg'));
-                $img->insert(public_path($barcode_file_name), 'top-left', 0, 0);
+                $img->insert(public_path($barcode_file_name), 'top-left', 2, 0);
                 $img->text($info, 30, 24);
                 $img->save(public_path($barcode_file_name));
 
