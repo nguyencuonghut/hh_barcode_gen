@@ -8,6 +8,7 @@ use App\Barcode;
 use Milon\Barcode\DNS1D;
 use Excel;
 use PHPExcel_Worksheet_Drawing;
+use Image;
 
 class BarcodeController extends Controller
 {
@@ -133,8 +134,15 @@ class BarcodeController extends Controller
                 // Create barcode image (.png)
                 $barcode_info = Barcode::find($id);
                 //$client = Client::findOrFail($barcode_info->client_name);
-                $info = $barcode_info->client_name . ' ' . date("M", mktime(0, 0, 0, $barcode_info->selling_month, 10));;
+                $info = $barcode_info->client_name . ' '.date("M", mktime(0, 0, 0, $barcode_info->selling_month, 10));;
                 $barcode_file_name =  DNS1D::getBarcodePNGPath($info, "C128");
+
+                //Add text to barcode
+                $img = Image::make(public_path('barcodes/blank_2.jpg'));
+                $img->insert(public_path($barcode_file_name), 'top-left', 0, 0);
+                $img->text($info, 30, 24);
+                $img->save(public_path($barcode_file_name));
+
 
                 //Import image to A1 and C1
                 $objDrawing = new PHPExcel_Worksheet_Drawing;
